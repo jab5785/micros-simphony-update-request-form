@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micros/Simphony Update Request Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Micros/Simphony Update Request Form</h1>
+            <p class="form-description">Use this form to submit item or price change requests for Micros/Simphony. All requests must be reviewed and approved before implementation.</p>
+        </div>
+
+        <form id="updateRequestForm" class="form-content">
+            <!-- Section 1: Requestor Details -->
+            <div class="form-section">
+                <h2 class="section-title">Section 1: Requestor Details</h2>
+                
+                <div class="form-group">
+                    <label for="fullName" class="required">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="department" class="required">Department</label>
+                    <input type="text" id="department" name="department" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location" class="required">Ship / Location</label>
+                    <select id="location" name="location" required>
+                        <option value="">Select Location</option>
+                        <option value="Rotterdam">Rotterdam</option>
+                        <option value="Nieuw Statendam">Nieuw Statendam</option>
+                        <option value="Koningsdam">Koningsdam</option>
+                        <option value="Nieuw Amsterdam">Nieuw Amsterdam</option>
+                        <option value="Eurodam">Eurodam</option>
+                        <option value="Westerdam">Westerdam</option>
+                        <option value="Oosterdam">Oosterdam</option>
+                        <option value="Zuiderdam">Zuiderdam</option>
+                        <option value="Zaandam">Zaandam</option>
+                        <option value="Volendam">Volendam</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="otherLocationGroup" style="display: none;">
+                    <label for="otherLocation">Please specify location</label>
+                    <input type="text" id="otherLocation" name="otherLocation">
+                </div>
+            </div>
+
+            <!-- Section 2: Request Type -->
+            <div class="form-section">
+                <h2 class="section-title">Section 2: Request Type</h2>
+                
+                <div class="form-group">
+                    <label class="required">Type of Request (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="priceChange" name="requestType" value="Price Change">
+                            <label for="priceChange">Price Change</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="itemAddition" name="requestType" value="Item Addition">
+                            <label for="itemAddition">Item Addition</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="itemRemoval" name="requestType" value="Item Removal">
+                            <label for="itemRemoval">Item Removal</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="buttonUpdate" name="requestType" value="Button Update">
+                            <label for="buttonUpdate">Button Update</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="otherRequest" name="requestType" value="Other">
+                            <label for="otherRequest">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="otherRequestGroup" style="display: none;">
+                    <label for="otherRequestText">Please specify other request type</label>
+                    <input type="text" id="otherRequestText" name="otherRequestText" placeholder="Describe your request type">
+                </div>
+            </div>
+
+            <!-- Section 3: Item Information -->
+            <div class="form-section">
+                <h2 class="section-title">Section 3: Item Information</h2>
+                <p class="section-note">For multiple items, please submit a separate form or attach a file in Section 5.</p>
+                
+                <div class="form-group">
+                    <label for="itemName" class="required">Item Name</label>
+                    <input type="text" id="itemName" name="itemName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemCode">Item Code (if applicable)</label>
+                    <input type="text" id="itemCode" name="itemCode" placeholder="Optional">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="currentPrice" class="required">Current Price</label>
+                        <input type="number" id="currentPrice" name="currentPrice" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPrice" class="required">New Price</label>
+                        <input type="number" id="newPrice" name="newPrice" step="0.01" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rvcAffected" class="required">RVC(s) Affected</label>
+                    <textarea id="rvcAffected" name="rvcAffected" rows="3" required placeholder="List all Revenue Centers affected by this change"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reasonForChange" class="required">Reason for Change</label>
+                    <textarea id="reasonForChange" name="reasonForChange" rows="4" required placeholder="Provide detailed explanation for the requested change"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 4: Justification -->
+            <div class="form-section">
+                <h2 class="section-title">Section 4: Justification</h2>
+                
+                <div class="form-group">
+                    <label class="required">What is the justification for this request? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="depleted" name="justification" value="Item is depleted fleetwide">
+                            <label for="depleted">Item is depleted fleetwide</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="financeApproved" name="justification" value="Finance-approved price change">
+                            <label for="financeApproved">Finance-approved price change</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="operational" name="justification" value="Operational need (event, promo, etc.)">
+                            <label for="operational">Operational need (event, promo, etc.)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="otherJustification" name="justification" value="Other">
+                            <label for="otherJustification">Other (please specify below)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalNotes">Additional Notes</label>
+                    <textarea id="additionalNotes" name="additionalNotes" rows="4" placeholder="Provide any additional information or context for this request"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 5: File Upload -->
+            <div class="form-section">
+                <h2 class="section-title">Section 5: File Upload (Optional)</h2>
+                
+                <div class="form-group">
+                    <label for="supportingDocument">Upload Supporting Document</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="supportingDocument" name="supportingDocument" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif">
+                        <div class="file-upload-info">
+                            <p>Accepted file types: PDF, Excel (.xlsx, .xls), Images (.jpg, .jpeg, .png, .gif)</p>
+                            <p>Maximum file size: 10MB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="resetForm()">Clear Form</button>
+                <button type="submit" class="btn-primary">Submit Request</button>
+            </div>
+        </form>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            <h3>Request Submitted Successfully!</h3>
+            <p>Your Micros/Simphony update request has been submitted and will be reviewed by the appropriate team. You will receive a confirmation email shortly.</p>
+            <button type="button" class="btn-primary" onclick="submitAnother()">Submit Another Request</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
